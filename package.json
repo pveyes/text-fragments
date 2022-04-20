@@ -1,0 +1,75 @@
+{
+  "name": "text-fragments",
+  "version": "0.1.0",
+  "source": "src/index.ts",
+  "exports": {
+    ".": "./dist/index.modern.js",
+    "./react": "./dist/react.modern.js"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "typings": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "microbundle src/*.ts",
+    "test": "jest --passWithNoTests",
+    "prepare": "husky install",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "author": "Fatih Kalifa",
+  "size-limit": [
+    {
+      "path": "dist/text-fragments.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/text-fragments.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.16.7",
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "microbundle": "^0.14.2",
+    "prettier": "^2.6.2",
+    "pretty-quick": "^3.1.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "size-limit": "^7.0.8",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.3"
+  }
+}

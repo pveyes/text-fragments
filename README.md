@@ -1,0 +1,5 @@
+# text-fragments
+
+## License
+
+MIT
