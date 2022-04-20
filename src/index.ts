@@ -21,56 +21,6 @@ export function getSelection(): LiteSelection | null {
   return normalizeSelectionDirection(currentSelection);
 }
 
-export function normalizeSelectionDirection(
-  selection: Selection
-): LiteSelection {
-  const { anchorNode, anchorOffset, focusNode, focusOffset } = selection;
-
-  if (!anchorNode || !focusNode) {
-    return { anchorNode, anchorOffset, focusNode, focusOffset };
-  }
-
-  const position = anchorNode.compareDocumentPosition(focusNode);
-  if (position === 2) {
-    // backward selection across multiple node
-    return {
-      anchorNode: focusNode,
-      anchorOffset: focusOffset,
-      focusNode: anchorNode,
-      focusOffset: anchorOffset,
-    };
-  }
-
-  if (position === 0 && anchorOffset > focusOffset) {
-    // backward selection within same node
-    return {
-      anchorNode,
-      anchorOffset: focusOffset,
-      focusNode,
-      focusOffset: anchorOffset,
-    };
-  }
-
-  if (focusOffset === 0) {
-    // only select new line, check previous node
-    const previousFocusNode = getPreviousNode(focusNode);
-
-    return {
-      anchorNode,
-      anchorOffset,
-      focusNode: previousFocusNode,
-      focusOffset: previousFocusNode?.textContent?.length ?? 0,
-    };
-  }
-
-  return {
-    anchorNode,
-    anchorOffset,
-    focusNode,
-    focusOffset,
-  };
-}
-
 interface SelectedTextOptions {
   maxLength?: number;
   moreTextIndicator?: string;
@@ -182,6 +132,54 @@ export function getTextFragmentsWithHash(selection: LiteSelection): string {
  * Internals
  * ================================================================================
  */
+
+function normalizeSelectionDirection(selection: Selection): LiteSelection {
+  const { anchorNode, anchorOffset, focusNode, focusOffset } = selection;
+
+  if (!anchorNode || !focusNode) {
+    return { anchorNode, anchorOffset, focusNode, focusOffset };
+  }
+
+  const position = anchorNode.compareDocumentPosition(focusNode);
+  if (position === 2) {
+    // backward selection across multiple node
+    return {
+      anchorNode: focusNode,
+      anchorOffset: focusOffset,
+      focusNode: anchorNode,
+      focusOffset: anchorOffset,
+    };
+  }
+
+  if (position === 0 && anchorOffset > focusOffset) {
+    // backward selection within same node
+    return {
+      anchorNode,
+      anchorOffset: focusOffset,
+      focusNode,
+      focusOffset: anchorOffset,
+    };
+  }
+
+  if (focusOffset === 0) {
+    // only select new line, check previous node
+    const previousFocusNode = getPreviousNode(focusNode);
+
+    return {
+      anchorNode,
+      anchorOffset,
+      focusNode: previousFocusNode,
+      focusOffset: previousFocusNode?.textContent?.length ?? 0,
+    };
+  }
+
+  return {
+    anchorNode,
+    anchorOffset,
+    focusNode,
+    focusOffset,
+  };
+}
 
 interface TextSelection {
   textStart: string;

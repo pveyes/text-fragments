@@ -5068,6 +5068,11 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
+text-fragments-polyfill@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/text-fragments-polyfill/-/text-fragments-polyfill-5.3.0.tgz#5bc416003b2455ce488542f40fe998d92302eb44"
+  integrity sha512-G6/qkbkumJULafdJ2IcGSsVTsSywNKsO1JDyV7xPWwf9xNbzpRPteZQvjdqxAnpnh7HYiqzuZFhSYTmxpgwz5A==
+
 throat@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/throat/-/throat-6.0.1.tgz#d514fedad95740c12c2d7fc70ea863eb51ade375"

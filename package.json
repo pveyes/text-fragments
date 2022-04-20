@@ -13,15 +13,26 @@
   "license": "MIT",
   "files": [
     "dist",
-    "src"
+    "src",
+    "react.js",
+    "react.d.ts"
+  ],
+  "keywords": [
+    "text-fragments",
+    "selection",
+    "dom-selection",
+    "dom",
+    "text",
+    "fragments"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "scripts": {
     "build": "microbundle src/*.ts",
     "test": "jest --passWithNoTests",
-    "prepare": "husky install",
+    "postinstall": "husky install",
+    "prepare": "yarn build && cp dist/react.d.ts react.d.ts",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -47,12 +58,8 @@
   "author": "Fatih Kalifa",
   "size-limit": [
     {
-      "path": "dist/text-fragments.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/text-fragments.esm.js",
-      "limit": "10 KB"
+      "path": "dist/index.modern.js",
+      "limit": "1.3 KB"
     }
   ],
   "devDependencies": {

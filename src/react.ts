@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { LiteSelection, getSelection, getTextFragments } from './index';
+import {
+  LiteSelection,
+  getSelection,
+  getTextFragments,
+  getTextFragmentsWithHash,
+} from './index';
 
 export function useSelection() {
   const [selection, setSelection] = useState<LiteSelection | null>(null);
@@ -31,7 +36,13 @@ export function useSelection() {
   return selection;
 }
 
-export function useTextFragments() {
+export function useTextFragments({ includeHash = false } = {}) {
   const selection = useSelection();
-  return selection ? getTextFragments(selection) : null;
+  if (!selection) {
+    return null;
+  }
+
+  return includeHash
+    ? getTextFragmentsWithHash(selection)
+    : getTextFragments(selection);
 }
